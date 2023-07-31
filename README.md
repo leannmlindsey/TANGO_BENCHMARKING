@@ -3,10 +3,11 @@
 This repository contains all of the code to reproduce the benchmarking results for TANGO.
 
 ## GASAL2
-
-Get 
+These instructions are for the A100 GPUs on the Notchpeak Cluster of the University of Utah CHPC
 
 ```
+salloc -M notchpeak --account=soc-gpu-np --partition=soc-gpu-np --nodes=1 --ntasks=8  --gres=gpu:a100:1 -t 0:30:00
+
 module load cuda
 
 git clone https://github.com/nahmedraja/GASAL2.git
