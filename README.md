@@ -33,3 +33,17 @@ make
 # -t flag to use traceback
 # -p flag to print the results including the CIGAR string
 ```
+## PARASAIL
+
+```
+srun -M kingspeak --account=sundar-kp --partition=soc-kp --nodes=1 --ntasks=16 -t 1:00:00 --pty /bin/bash -l
+
+git clone https://github.com/jeffdaily/parasail.git
+# Create a directory for the include and lib files
+
+cd parasail/
+autoreconf -fi
+./configure --prefix=<directory for include and lib files>
+make -j8
+make install -j8
+```
