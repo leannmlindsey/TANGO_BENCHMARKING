@@ -1,6 +1,8 @@
 # TANGO_BENCHMARKING
 
-This repository contains all of the code to reproduce the benchmarking results for TANGO.
+This repository contains all of the code to reproduce the benchmarking results for TANGO. 
+
+Instructions for cloning and installing the libraries:
 
 ## GASAL2
 These instructions are for the A100 GPUs on the Notchpeak Cluster of the University of Utah CHPC
