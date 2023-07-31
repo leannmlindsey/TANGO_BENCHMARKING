@@ -36,14 +36,46 @@ make
 ## PARASAIL
 
 ```
-srun -M kingspeak --account=sundar-kp --partition=soc-kp --nodes=1 --ntasks=16 -t 1:00:00 --pty /bin/bash -l
+salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00 
 
 git clone https://github.com/jeffdaily/parasail.git
 # Create a directory for the include and lib files
 
 cd parasail/
+
 autoreconf -fi
+
 ./configure --prefix=<directory for include and lib files>
+
 make -j8
+
 make install -j8
 ```
+
+## SEQAN3
+```
+salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00
+
+mkdir seqan3_code
+
+cd seqan3_code
+
+mkdir build
+
+mkdir source
+
+git clone --recurse-submodules https://github.com/seqan/seqan3.git
+```
+## SSW
+```
+salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00
+
+git clone https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library.git
+
+cd Complete-Striped-Smith-Waterman-Library.git
+
+cd src
+
+make
+```
+
