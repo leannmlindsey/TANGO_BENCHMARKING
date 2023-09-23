@@ -229,12 +229,18 @@ Merge: 6e9fcaf 5e7ebab
 Author: Rob Egan <rsegan@lbl.gov>
 Date:   Wed Jun 22 18:43:01 2022 +0000
 ```
+Install the current version of mhm into a directory called mhm_tango
 
+Install the mhm2 from the above listed commit into a directory called mhm_no_tango
 ## Step 6: Run Bash Scripts for Metahipmer Benchmarking
 
-Running mhm2 with the --post-asm-align
+Benchmark both versions by running mhm2 with the --post-asm-align flag (TANGO is not used if the SAM file with CIGAR strings is not requested).
 
 ```
+cd <directory with current mhm2 version>
+mhm2.py -r <metagenomic fastq file> --post-asm-align
+
+cd <directory with mhm2 commit 56179b9f4fb679c3ec034b709aa34058113d72d9>
 mhm2.py -r <metagenomic fastq file> --post-asm-align
 
 ```
