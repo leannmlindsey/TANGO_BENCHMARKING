@@ -8,9 +8,11 @@ These instructions are for the A100 GPUs on the Notchpeak Cluster of the Univers
 
 Step 1: Clone this github repository which holds the benchmarking scripts
 
-Step 2: Clone TANGO and comparison libraries and compile binaries
+Step 2: Clone GPU libraries and compile
 
-Step 3: Submit the bash scripts for benchmarking
+Step 3: Clone CPU libraries, copy over multithreaded test programs and compile
+
+Step 4: Submit the bash scripts for benchmarking
 
 ## Dependencies
 
@@ -33,9 +35,11 @@ cd SRC
 
 ```
 
-## Step 2: Clone TANGO and comparison libraries and compile binaries
+## Step 2: Clone GPU libraries and compile
 
 Instructions for cloning and installing the libraries:
+
+Notes: All of the GPU libraries have test programs that do pairwise alignment, so they are compiled exactly as the instructions in the corresponding githubs
 
 ### TANGO
 
@@ -96,11 +100,14 @@ make
 # -t flag to use traceback
 # -p flag to print the results including the CIGAR string
 ```
+
+## Step 3: Clone CPU libraries, copy over multithreaded test programs and compile
+
+Notes: The CPU libraries did not have pre-written multithreaded test programs so we wrote custom programs and these must be copied into the appropriate directory and compiled.  Instructions are below. 
+
 ### PARASAIL
 
 ```
-salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00 
-
 git clone https://github.com/jeffdaily/parasail.git
 # Create a directory for the include and lib files
 
@@ -113,12 +120,11 @@ autoreconf -fi
 make -j8
 
 make install -j8
+
 ```
 
 ### SEQAN3
 ```
-salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00
-
 mkdir seqan3_code
 
 cd seqan3_code
@@ -142,7 +148,7 @@ cd src
 make
 ```
 
-## Step 3: Submit the bash scripts for benchmarking
+## Step 4: Submit the bash scripts for benchmarking
 
 ### Instructions to run the slurm scripts:
 
@@ -206,3 +212,19 @@ sbatch test_all_seqan3_aa_slurm.sh <path to SEQAN3 binary> <aa directory> <outpu
 sbatch test_all_seqan3_dna_slurm.sh <path to SEQAN3 binary> <dna directory> <output directory>
 
 ``
+
+## Step 5: Install UPC++ and Metahipmer
+
+MetaHipMer2 and UPC++, a required dependency, can be downloaded from:
+
+https://bitbucket.org/berkeleylab/mhm2/src/master/
+
+Installation and build instructions are available in the user guide:
+
+https://bitbucket.org/berkeleylab/mhm2/src/1e50f8aa805917e0a4d8ee16a9ad1ec34f48d407/docs/mhm_guide.md
+
+The TANGO code is integrated into the most recent version of MHM2.
+
+## Step 6: Run Bash Scripts for Metahipmer Benchmarking
+
+
