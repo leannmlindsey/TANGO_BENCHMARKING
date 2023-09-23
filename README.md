@@ -2,10 +2,14 @@
 
 This repository contains all of the code and instructions to reproduce the results for TANGO:A GPU optimized traceback approach for sequence alignment algorithms, accepted as a short paper for the 13th Workshop on Irregular Applications: Architectures and Algorithms, a workshop at SC '23.
 
+These instructions are for the A100 GPUs on the Notchpeak Cluster of the University of Utah CHPC. When installing on a different system, you should make appropriate changes to the 'salloc' and 'module load cuda' commands to make sure that you have an interactive allocation to a node with access to a GPU and that cuda is available.
+
 ## Overview
 
 Step 1: Clone this github repository which holds the benchmarking scripts
+
 Step 2: Clone TANGO and comparison libraries and compile binaries
+
 Step 3: Submit the bash scripts for benchmarking
  
 
@@ -47,10 +51,22 @@ make
 
 ### ADEPT 
 
+```
+git clone https://github.com/mgawan/GPU-BSW.git
+
+cd GPU-BSW
+
+mkdir build
+
+cd build
+
+cmake CMAKE_BUILD_TYPE=Release ..
+
+make
+```
+
 ### GASAL2
 
-These instructions are for the A100 GPUs on the Notchpeak Cluster of the University of Utah CHPC
-When installing on a different system, you should make appropriate changes to the "salloc" and "module load" commands to get an interactive allocation and load cuda 
 
 ```
 git clone https://github.com/nahmedraja/GASAL2.git
