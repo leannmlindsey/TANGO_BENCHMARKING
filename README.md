@@ -211,20 +211,31 @@ sbatch test_all_seqan3_aa_slurm.sh <path to SEQAN3 binary> <aa directory> <outpu
 
 sbatch test_all_seqan3_dna_slurm.sh <path to SEQAN3 binary> <dna directory> <output directory>
 
-``
+```
 
 ## Step 5: Install UPC++ and Metahipmer
 
-MetaHipMer2 and UPC++, a required dependency, can be downloaded from:
+MetaHipMer2 and UPC++, a required dependency, can be downloaded from [MHM2 github](https://bitbucket.org/berkeleylab/mhm2/src/master/).
 
-https://bitbucket.org/berkeleylab/mhm2/src/master/
+Installation and build instructions are available in the [user guide](https://bitbucket.org/berkeleylab/mhm2/src/1e50f8aa805917e0a4d8ee16a9ad1ec34f48d407/docs/mhm_guide.md).
 
-Installation and build instructions are available in the user guide:
+Test after installation to make sure that the installation is working correctly.
 
-https://bitbucket.org/berkeleylab/mhm2/src/1e50f8aa805917e0a4d8ee16a9ad1ec34f48d407/docs/mhm_guide.md
+Note: An earlier version of the TANGO code (with diagonal major indexing (DMI), not stacked DMI) is integrated into the most current version of MHM2.  To run the comparisons for this paper we compared against 
 
-The TANGO code is integrated into the most recent version of MHM2.
+```
+commit 56179b9f4fb679c3ec034b709aa34058113d72d9 (HEAD -> master, origin/master, origin/HEAD)
+Merge: 6e9fcaf 5e7ebab
+Author: Rob Egan <rsegan@lbl.gov>
+Date:   Wed Jun 22 18:43:01 2022 +0000
+```
 
 ## Step 6: Run Bash Scripts for Metahipmer Benchmarking
 
+Running mhm2 with the --post-asm-align
+
+```
+mhm2.py -r <metagenomic fastq file> --post-asm-align
+
+```
 
