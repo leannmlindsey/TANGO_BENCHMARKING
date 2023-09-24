@@ -125,37 +125,87 @@ make install -j8
 Now link the parasail library and compile multithreaded_aa.cpp and multithreaded_dna.cpp
 
 ```
+cd ~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL
+
 gcc multithreaded_dna.cpp -I <include path>  -L <parasail lib path> -lparasail -lstdc++ -fopenmp -o multithreaded_dna
+
+gcc multithreaded_aa.cpp -I <include path>  -L <parasail lib path> -lparasail -lstdc++ -fopenmp -o multithreaded_aa
 ```
 Here are the instructions about the include path and the lib path taken directly from the parasail github
 
 >By default, running "make install" will install parasail into /usr/local. You will find the parasail.h header in /usr/local/include and the parasail library, e.g., libparasail.a, in /usr/local/lib. If you specify a different prefix during configure, for example configure --prefix=/some/other/path, then look within the include and lib directories there for the parasail.h header and libparasail.so library, respectively.
 
 >Don't forget to link your application to the parasail library. For example, gcc foo.c -I/where/you/installed/include -L/where/you/installed/lib -lparasail. Otherwise, you'll see errors such as undefined reference to 'parasail_sw'
-### SEQAN3
-```
-mkdir seqan3_code
 
-cd seqan3_code
+The parasail binaries will now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL/multithreaded_dna
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL/multithreaded_aa
+
+### SEQAN3
+These set up instructions are taken from the Seqan3 Documentation [Quick Setup](https://docs.seqan.de/seqan3/3-master-user/setup.html)
+
+```
+cd SEQAN3
+
+mkdir tutorial
+
+cd tutorial
 
 mkdir build
 
 mkdir source
 
 git clone --recurse-submodules https://github.com/seqan/seqan3.git
+
+cp CMakeLists.txt source
+
+cp seqan_aa_align_multithread.cpp source
+
+cp seqan_dna_align_multithread.cpp source
+
+cd build
+
+cmake -DCMAKE_BUILD_TYPE=Release ../source
+
+make
+
 ```
+
+The binaries for SEQAN3 will now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/SEQAN3/tutorial/build/seqan_aa_align_multithread
+
+~~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/SEQAN3/tutorial/build/seqan_dna_align_multithread
+
 ### SSW
 ```
 salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00
 
+cd SSW
+
 git clone https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library.git
 
-cd Complete-Striped-Smith-Waterman-Library.git
+cp Makefile Complete-Striped-Smith-Waterman-Library/src
+
+cp example_dna.cpp Complete-Striped-Smith-Waterman-Library/src
+
+cp example_aa.cpp Complete-Striped-Smith-Waterman-Library/src
+
+cd Complete-Striped-Smith-Waterman-Library
 
 cd src
 
-make
+make ssw_test_aa_multi ssw_test_dna_multi
 ```
+
+The SSW binaries will now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/SSW/Complete-Striped-Smith-Waterman-Library/src/ssw_test_aa_multi
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/SSW/Complete-Striped-Smith-Waterman-Library/src/ssw_test_dna_multi
+
 
 ## Step 4: Submit the bash scripts for benchmarking
 
