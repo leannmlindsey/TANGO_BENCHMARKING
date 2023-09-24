@@ -122,7 +122,16 @@ make -j8
 make install -j8
 
 ```
+Now link the parasail library and compile multithreaded_aa.cpp and multithreaded_dna.cpp
 
+```
+gcc multithreaded_dna.cpp -I <include path>  -L <parasail lib path> -lparasail -lstdc++ -fopenmp -o multithreaded_dna
+```
+Here are the instructions about the include path and the lib path taken directly from the parasail github
+
+>By default, running "make install" will install parasail into /usr/local. You will find the parasail.h header in /usr/local/include and the parasail library, e.g., libparasail.a, in /usr/local/lib. If you specify a different prefix during configure, for example configure --prefix=/some/other/path, then look within the include and lib directories there for the parasail.h header and libparasail.so library, respectively.
+
+>Don't forget to link your application to the parasail library. For example, gcc foo.c -I/where/you/installed/include -L/where/you/installed/lib -lparasail. Otherwise, you'll see errors such as undefined reference to 'parasail_sw'
 ### SEQAN3
 ```
 mkdir seqan3_code

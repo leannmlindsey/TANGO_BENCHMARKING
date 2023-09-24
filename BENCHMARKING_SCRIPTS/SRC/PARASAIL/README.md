@@ -8,5 +8,6 @@ gcc multithreaded_aa.cpp -I<dir to include files> -L<dir to lib files> -lparasai
 # Run Instructions
 
 ./multithreaded_dna ../test-data/dna-reference.fasta ../test-data/dna-query.fasta outfile_parasail_dna.txt
+
 ./multithreaded_aa ../test-data/protein-reference.fasta ../test-data/protein-query.fasta outfile_parasail_aa.txt
 
