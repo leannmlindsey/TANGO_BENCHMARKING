@@ -24,6 +24,8 @@ Step 6: Run Bash Scripts for Metahipmer Benchmarking
 
 - NVCC 11.6 or greater
 
+- GCC 10.0 or greater (required for SEQAN3)
+
 ## Step 1: Clone this github repository which holds the benchmarking scripts
 
 ```
