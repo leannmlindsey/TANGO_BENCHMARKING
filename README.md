@@ -14,6 +14,10 @@ Step 3: Clone CPU libraries, copy over multithreaded test programs and compile
 
 Step 4: Submit the bash scripts for benchmarking
 
+Step 5: Install UPC++ and Metahipmer
+
+Step 6: Run Bash Scripts for Metahipmer Benchmarking
+
 ## Dependencies
 
 - CMAKE 3.27.0 or greater
