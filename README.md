@@ -58,6 +58,10 @@ make
 
 ```
 
+The TANGO binary should now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/TANGO/build/program_gpu
+
 ### ADEPT 
 
 ```
@@ -74,6 +78,9 @@ cmake CMAKE_BUILD_TYPE=Release ..
 make
 ```
 
+The ADEPT binary should now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/GPU-BSW/build/program_gpu
 ### GASAL2
 
 
@@ -100,6 +107,9 @@ make
 # -t flag to use traceback
 # -p flag to print the results including the CIGAR string
 ```
+The GASAL2 binary should now be located at
+
+~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/GASAL2/test_prog/test_prog.out
 
 ## Step 3: Clone CPU libraries, copy over multithreaded test programs and compile
 
