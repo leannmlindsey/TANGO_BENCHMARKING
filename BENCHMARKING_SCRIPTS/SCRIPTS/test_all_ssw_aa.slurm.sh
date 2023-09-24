@@ -32,9 +32,9 @@ for file in $bins; do
      pwd
      prefix=${file%_read.fasta}
      echo "Running with traceback"
-     $script_dir/ssw_test ${input_dir}/${prefix}_ref.fasta ${input_dir}/${prefix}_read.fasta ${output_dir}/ssw_traceback_aa_results_${prefix}.txt 1 32 > ${output_dir}/FINAL_ssw_traceback_aa_${prefix}.txt
+     $script_dir/ssw_test_aa_multi ${input_dir}/${prefix}_ref.fasta ${input_dir}/${prefix}_read.fasta ${output_dir}/ssw_traceback_aa_results_${prefix}.txt 1 32 > ${output_dir}/FINAL_ssw_traceback_aa_${prefix}.txt
      echo "Running without traceback"
-     $script_dir/ssw_test ${input_dir}/${prefix}_ref.fasta ${input_dir}/${prefix}_read.fasta ${output_dir}/ssw_notraceback_aa_results_${prefix}.txt 0 32 > ${output_dir}/FINAL_ssw_notraceback_aa_${prefix}.txt
+     $script_dir/ssw_test_aa_multi ${input_dir}/${prefix}_ref.fasta ${input_dir}/${prefix}_read.fasta ${output_dir}/ssw_notraceback_aa_results_${prefix}.txt 0 32 > ${output_dir}/FINAL_ssw_notraceback_aa_${prefix}.txt
 
 done
 
