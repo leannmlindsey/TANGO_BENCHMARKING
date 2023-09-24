@@ -33,11 +33,13 @@ salloc -M notchpeak --account=soc-gpu-np --partition=soc-gpu-np --nodes=1 --ntas
 
 module load cuda
 
+module load gcc/11.2.0
+
 git clone https://github.com/leannmlindsey/TANGO_BENCHMARKING.git
 
 cd TANGO_BENCHMARKING
 
-cd SRC
+cd BENCHMARKING_SCRIPTS/SRC
 
 ```
 
@@ -60,7 +62,9 @@ cd build
 
 cmake CMAKE_BUILD_TYPE=Release ..
 
-make 
+make
+
+cd ../.. 
 
 ```
 
@@ -82,6 +86,8 @@ cd build
 cmake CMAKE_BUILD_TYPE=Release ..
 
 make
+
+cd ../..
 ```
 
 The ADEPT binary should now be located at
@@ -89,6 +95,12 @@ The ADEPT binary should now be located at
 ~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/GPU-BSW/build/program_gpu
 ### GASAL2
 
+Before you begin the GASAL2 installation, you will need to locate the path to your NVCC installation.  One way to do this is to extract it from your $PATH variable as shown below:
+```
+echo $PATH | tr ':' '\n' | grep 'cuda'
+
+```
+This should show the path to the NVCC installation. The path that GASAL2 expects is the directory above ~/bin
 
 ```
 git clone https://github.com/nahmedraja/GASAL2.git
@@ -112,6 +124,8 @@ make
 # -s flag to get the start positions
 # -t flag to use traceback
 # -p flag to print the results including the CIGAR string
+
+cd ../..
 ```
 The GASAL2 binary should now be located at
 
@@ -124,13 +138,17 @@ Notes: The CPU libraries did not have pre-written multithreaded test programs so
 ### PARASAIL
 
 ```
+cd PARASAIL
+
 git clone https://github.com/jeffdaily/parasail.git
 # Create a directory for the include and lib files
 
 cd parasail/
 
 autoreconf -fi
-
+```
+You will need to get the full path of the ~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL/parasail directory and use it below for the <directory for include and lib files>
+```
 ./configure --prefix=<directory for include and lib files>
 
 make -j8
@@ -141,18 +159,15 @@ make install -j8
 Now link the parasail library and compile multithreaded_aa.cpp and multithreaded_dna.cpp
 
 ```
-cd ~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL
+cd ..
 
 gcc multithreaded_dna.cpp -I <include path>  -L <parasail lib path> -lparasail -lstdc++ -fopenmp -o multithreaded_dna
 
 gcc multithreaded_aa.cpp -I <include path>  -L <parasail lib path> -lparasail -lstdc++ -fopenmp -o multithreaded_aa
+
+cd ..
+
 ```
-Here are the instructions about the include path and the lib path taken directly from the parasail github
-
->By default, running "make install" will install parasail into /usr/local. You will find the parasail.h header in /usr/local/include and the parasail library, e.g., libparasail.a, in /usr/local/lib. If you specify a different prefix during configure, for example configure --prefix=/some/other/path, then look within the include and lib directories there for the parasail.h header and libparasail.so library, respectively.
-
->Don't forget to link your application to the parasail library. For example, gcc foo.c -I/where/you/installed/include -L/where/you/installed/lib -lparasail. Otherwise, you'll see errors such as undefined reference to 'parasail_sw'
-
 The parasail binaries will now be located at
 
 ~/TANGO_BENCHMARKING/BENCHMARKING_SCRIPTS/SRC/PARASAIL/multithreaded_dna
@@ -165,8 +180,6 @@ These set up instructions are taken from the Seqan3 Documentation [Quick Setup](
 ```
 cd SEQAN3
 
-mkdir tutorial
-
 cd tutorial
 
 mkdir build
@@ -175,17 +188,13 @@ mkdir source
 
 git clone --recurse-submodules https://github.com/seqan/seqan3.git
 
-cp CMakeLists.txt source
-
-cp seqan_aa_align_multithread.cpp source
-
-cp seqan_dna_align_multithread.cpp source
-
 cd build
 
 cmake -DCMAKE_BUILD_TYPE=Release ../source
 
 make
+
+cd ../../..
 
 ```
 
@@ -197,8 +206,6 @@ The binaries for SEQAN3 will now be located at
 
 ### SSW
 ```
-salloc -M notchpeak --account=sundar-np --partition=soc-np --nodes=1 --ntasks=16 -t 0:30:00
-
 cd SSW
 
 git clone https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library.git
@@ -209,11 +216,11 @@ cp example_dna.cpp Complete-Striped-Smith-Waterman-Library/src
 
 cp example_aa.cpp Complete-Striped-Smith-Waterman-Library/src
 
-cd Complete-Striped-Smith-Waterman-Library
-
-cd src
+cd Complete-Striped-Smith-Waterman-Library/src
 
 make ssw_test_aa_multi ssw_test_dna_multi
+
+cd ../../../..
 ```
 
 The SSW binaries will now be located at
@@ -252,6 +259,8 @@ Notes:
 - The read and ref files must be pairwise (matching pairs of equal length, one read corresponding to one ref) and must have the extension _read.fasta and _ref.fasta for this bash script to work correctly
 
 ```
+cd SCRIPTS
+
 sbatch test_all_gpu_libraries.slurm.sh <path to ADEPT binary> <path to TANGO binary> <path to GASAL2 test program> <aa directory> <dna directory> <output_dir>
 ```
 
